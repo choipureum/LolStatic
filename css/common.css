@@ -1,0 +1,124 @@
+﻿@charset "utf-8";
+
+
+/**
+*Auth : 최푸름
+*Date : 2021.02.02
+*Summary : common style
+*/
+
+/*footer*/
+button {all: unset;}
+.container {margin:0 auto; padding:200px 300px; background-color:black; }
+.container h2 {font-size:200px;}
+#search_summoner {all:unset; width: inherit; height:30px;}
+#search_summoner :focus {background-color:dimgrey;}
+
+
+body {
+    font-size: 10px;
+    font-family: KoPubWorldDotum_Pro;
+    background-color: black;
+    color: antiquewhite;
+    margin: 0;
+    display: grid;
+    height: 100vh;
+    place-items: center;
+}
+
+.c-checkbox {
+    display: none;
+}
+.c-form__toggle {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7);
+}
+
+.c-form__input,
+.c-form__buttonLabel {
+    transition: 0.2s 0.1s;
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+.c-formContainer,
+.c-form,
+.c-form__toggle {
+    width: 20em;
+    height: 6.25em;
+}
+
+.c-formContainer {
+    position: relative;
+    font-weight: 700;
+}
+
+.c-form,
+.c-form__toggle {
+    position: absolute;
+    border-radius: 6.25em;
+    background-color: $white;
+    transition: 0.2s;
+}
+
+.c-form {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.625em;
+    box-sizing: border-box;
+    box-shadow: 0 0.125em 0.3125em #000000;
+   
+    justify-content: center;
+}
+
+.c-form__toggle {
+    color: $salmon;
+    top: 0;
+    cursor: pointer;
+    z-index: 1;   
+    align-items: center;
+    justify-content: center;
+
+}
+
+.c-form__input,
+.c-form__button {
+    font: inherit;
+    border: 0;
+    outline: 0;
+    border-radius: 5em;
+    box-sizing: border-box;
+}
+
+.c-form__input,
+.c-form__buttonLabel {
+    font-size: 1.75em;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.7);
+    transition: 0s;
+}
+
+.c-form__input {
+    color: #ffcccc;
+    height: 100%;
+    width: 100%;
+    padding: 0 0.714em;
+}
+.c-form__buttonLabel {
+    color: #ffaea9;
+    height: 100%;
+    width: auto;
+  
+}
+
+.c-form__button {
+    color: inherit;
+    padding: 0;
+    height: 100%;
+    width: 5em;
+    background-color: #ff7b73;
+}

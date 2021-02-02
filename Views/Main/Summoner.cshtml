@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Summoner";
+    var accountId=@Model.summoner.accountId;
+}
+
+<h1>@Model.Summoner.</h1>
+<p style="font-size:15px;">레벨: @Model.summoner.level</p>
+<p>
+    이번주 로테:
+    @Model.rotation
+    챔피언 :
+    @Model.favoriteChamp
+    
+</p>
+
+
+
+
