@@ -19,6 +19,17 @@ namespace RiotInfo.com.Util
         public int level { get; set; }
         public int points { get; set; }
     }
+    public class Tier
+    {
+        public string tier { get; set; }
+        public string rank { get; set; }
+        public int leaguePoints { get; set; }
+        public string summonerId { get; set; }
+        public string summonerName { get; set; }
+        public string queueType { get; set; }
+        public int wins { get; set; }
+        public int losses { get; set; }
+    }
     public class Champion
     {
         public long id { get; set; }

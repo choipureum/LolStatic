@@ -96,3 +96,5 @@ C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Net.Http.Formatting.dll
 C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Web.Http.dll
 C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Net.Http.Formatting.xml
 C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Web.Http.xml
+C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Web.Http.WebHost.dll
+C:\Users\User\Desktop\wwwroot\RiotInfo.com\bin\System.Web.Http.WebHost.xml

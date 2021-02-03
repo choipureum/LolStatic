@@ -2,12 +2,37 @@
 @using RiotInfo.com.Util;
 @{
     ViewBag.Title = "Summoner";
-
+    var lankCnt = Model["tierInfo"].Count;
 }
 <header>@RenderPage("../include/header.cshtml")</header>
 <h1> @Model["summoner"].name</h1>
 <p style="font-size:15px;">레벨: @Model["summoner"].level</p>
-<p><strong>숙련도 챔피언 Top5 :</strong></p>
+<div class="rank" style="float:left;width:100%;">
+    @if (lankCnt > 0)
+    {
+        <div class="solo" style="border:1px solid #d06f4b;width:49%;float:left">
+            <p>@Model["tierInfo"][0].queueType</p>
+            <p>@Model["tierInfo"][0].tier : @Model["tierInfo"][0].rank</p>
+            <p>@Model["tierInfo"][0].leaguePoints 포인트</p>
+            <p>WIN : @Model["tierInfo"][0].wins / LOSS: @Model["tierInfo"][0].losses</p>
+            <p>WIN_Rate : @(String.Format("{0:0.##}", ((double)Model["tierInfo"][0].wins/ (Model["tierInfo"][0].wins + Model["tierInfo"][0].losses))*100)) %</p>
+
+        </div>
+    }
+    @if (lankCnt > 1)
+    {
+        <div class="free" style="border:1px solid #d06f4b; width:49%;float:right">
+            <p>@Model["tierInfo"][1].queueType</p>
+            <p>@Model["tierInfo"][1].tier : @Model["tierInfo"][1].rank</p>
+            <p>@Model["tierInfo"][1].leaguePoints 포인트</p>
+            <p>WIN : @Model["tierInfo"][1].wins / LOSS: @Model["tierInfo"][1].losses</p>
+            <p>WIN_Rate : @(String.Format("{0:0.##}", ((double)Model["tierInfo"][1].wins / (Model["tierInfo"][1].wins + Model["tierInfo"][1].losses)) * 100)) % </p>
+        </div>
+    }
+</div>
+
+<hr />
+<h2><strong>숙련도 챔피언 Top5 :</strong></h2>
 <table style="border:1px solid #d06f4b">
     <thead>
         <tr>
@@ -22,7 +47,7 @@
             <tr>
                 <td> @champ.name</td>
                 <td> @champ.level</td>
-                <td> @String.Format("{0:#,###}",champ.points) point</td>               
+                <td> @String.Format("{0:#,###}", champ.points) point</td>
             </tr>
         }
     </tbody>

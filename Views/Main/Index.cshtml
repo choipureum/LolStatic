@@ -36,8 +36,8 @@
 <script>
     function InsertChamp() {
         $.ajax({
-            url: "//RiotInfo.com/api/UploadChamp",
-            method: "POST",
+            url: "//RiotInfo.com/Champ/Upload",
+            method: "GET",
             success: function (d) {
                 alert("챔피언 등록완료");
             }

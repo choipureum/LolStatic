@@ -16,8 +16,8 @@ namespace RiotInfo.com.Controllers
         static string key = "RGAPI-1c908127-022d-464e-9689-774adc7fd1c5";
         private readonly FieldBiz _FieldBiz = new FieldBiz();
         
-        [HttpPost]
-        [Route("~/Champ/Upload")]
+        [HttpGet]
+        [Route("Champ/Upload")]
         public int UploadChamp()
         {
             int result = 0;

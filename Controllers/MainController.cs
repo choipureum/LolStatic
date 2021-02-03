@@ -10,6 +10,8 @@ using RiotInfo.com.Util;
 using RiotSharp;
 using RiotSharp.Misc;
 using RiotInfo.com.Bll;
+using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace RiotInfo.com.Controllers
 {
@@ -32,8 +34,7 @@ namespace RiotInfo.com.Controllers
             var api = RiotApi.GetDevelopmentInstance(key);
             var allVersion = api.StaticData.Versions.GetAllAsync().Result;
             var latestVersion = allVersion[0]; // Example of version: "10.23.1"
-            var champions = api.StaticData.Champions.GetAllAsync(latestVersion).Result.Champions.Values;
-
+            var champions = api.StaticData.Champions.GetAllAsync(latestVersion).Result.Champions.Values;           
             Dictionary<string,Object> dic = new Dictionary<string,Object>();
             
             try
@@ -41,7 +42,7 @@ namespace RiotInfo.com.Controllers
                 SummonerInfo info = new SummonerInfo();
                 //소환사
                 var summoner = api.Summoner.GetSummonerByNameAsync(Region.Kr, search_summoner).Result;
-
+               
                 info.name = summoner.Name;
                 info.level = (int)summoner.Level;
                 info.accountId = summoner.AccountId;
@@ -52,12 +53,14 @@ namespace RiotInfo.com.Controllers
                 List<ChampionMastery> favoriteChamp = GetChampionMasteries(summoner.Id, latestVersion);
                 dic.Add("favoriteChamp", favoriteChamp);
 
+                //티어정보
+                List<ExpandoObject> tier =GetTier(summoner.Id);
+                dic.Add("tierInfo", tier);
             }
             catch (RiotSharpException ex)
             {
                 Console.WriteLine("error");
-            }
-            
+            }            
             return View(dic);
         }
         public List<ChampionMastery> GetChampionMasteries(string id,string version)
@@ -98,6 +101,71 @@ namespace RiotInfo.com.Controllers
             }
             return rota;
 
+        }
+        /// <summary>
+        /// 랭크 정보
+        /// </summary>
+        public static dynamic GetTier(string id)
+        {
+            Object obj = null;     
+            //객체 JSON받아오기
+            try
+            {
+                HttpWebRequest objWRequest = (HttpWebRequest)System.Net.WebRequest.Create("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"+id+"?api_key="+key);
+                HttpWebResponse objWResponse = (HttpWebResponse)objWRequest.GetResponse();
+                Stream stream = objWResponse.GetResponseStream();
+                StreamReader reader = new StreamReader(stream);
+                string result = reader.ReadToEnd();
+                stream.Close();
+                objWResponse.Close();
+                //역직렬화
+
+                obj = JsonConvert.DeserializeObject(result);
+                
+            }
+            catch (Exception) { }
+            if (obj is string)
+
+            {
+                return obj as string;
+            }
+            else
+            {
+                return GetDynamicObject(obj as JToken);
+            }
+
+        }
+        private static dynamic GetDynamicObject(JToken token)
+        {
+            if (token is JValue)
+            {
+                return (token as JValue).Value;
+            }
+
+            else if (token is JObject)
+            {
+                ExpandoObject expandoObject = new ExpandoObject();
+                (from childToken in token where childToken is JProperty select childToken as JProperty).ToList().ForEach
+                (
+                    property =>
+                    {
+                        ((IDictionary<string, object>)expandoObject).Add(property.Name, GetDynamicObject(property.Value));
+                    }
+                );
+                return expandoObject;
+
+            }
+            else if (token is JArray)
+            {
+                List<ExpandoObject> list = new List<ExpandoObject>();
+
+                foreach (JToken item in token as JArray)
+                {
+                    list.Add(GetDynamicObject(item));
+                }
+                return list;
+            }
+            return null;
         }
 
     }
