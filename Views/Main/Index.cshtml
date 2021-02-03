@@ -1,4 +1,5 @@
 ﻿
+@using RiotInfo.com.Util;
 @{
     ViewBag.Title = "Index";
 }
@@ -12,9 +13,35 @@
         <div class="search">
             <input name="search_summoner" id="search_summoner" type="text"
                    placeholder="닭is치킨" />
-            <button type="submit">채찍버튼</button>
+            <button type="button" onclick="Onsubmit()">채찍버튼</button>
         </div>
     </form>
-
+    <div id="rota">
+        <h4>이번주 로테이션</h4>
+        <table>
+            <thead>
+                <tr>
+                    <td>name</td>
+                    <td>title</td>
+                    <td>skin count</td>
+                    <td>passive</td>
+                    <td></td>
+                </tr>
+            </thead>
+           
+        </table>
+        <button onclick="InsertChamp();">Admin 챔피언등록</button>
+    </div>
 </div>
+<script>
+    function InsertChamp() {
+        $.ajax({
+            url: "//RiotInfo.com/api/UploadChamp",
+            method: "POST",
+            success: function (d) {
+                alert("챔피언 등록완료");
+            }
+        })
+    }
+</script>
 

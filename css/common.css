@@ -8,10 +8,16 @@
 */
 
 /*footer*/
-button {all: unset;}
+button {all: unset; border: 1px solid antiquewhite; border-radius: 3px;cursor:pointer}
+button :hover{all:initial}
 .container {margin:0 auto; padding:200px 300px; background-color:black; }
 .container h2 {font-size:200px;}
-#search_summoner {all:unset; width: inherit; height:30px;}
+#search_summoner {
+    all: unset;
+    width: inherit;
+    height: 30px;
+    border-bottom: 1px solid antiquewhite
+}
 #search_summoner :focus {background-color:dimgrey;}
 
 

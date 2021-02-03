@@ -1,18 +1,34 @@
 ﻿
+@using RiotInfo.com.Util;
 @{
     ViewBag.Title = "Summoner";
-    var accountId=@Model.summoner.accountId;
-}
 
-<h1>@Model.Summoner.</h1>
-<p style="font-size:15px;">레벨: @Model.summoner.level</p>
-<p>
-    이번주 로테:
-    @Model.rotation
-    챔피언 :
-    @Model.favoriteChamp
-    
-</p>
+}
+<header>@RenderPage("../include/header.cshtml")</header>
+<h1> @Model["summoner"].name</h1>
+<p style="font-size:15px;">레벨: @Model["summoner"].level</p>
+<p><strong>숙련도 챔피언 Top5 :</strong></p>
+<table style="border:1px solid #d06f4b">
+    <thead>
+        <tr>
+            <th>ChampName</th>
+            <th>Level</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ChampionMastery champ in Model["favoriteChamp"])
+        {
+            <tr>
+                <td> @champ.name</td>
+                <td> @champ.level</td>
+                <td> @String.Format("{0:#,###}",champ.points) point</td>               
+            </tr>
+        }
+    </tbody>
+
+
+</table>
 
 
 
