@@ -17,7 +17,7 @@ namespace RiotInfo.com.Controllers
 {
     public class MainController : Controller
     {
-        static string key = "RGAPI-1c908127-022d-464e-9689-774adc7fd1c5";
+        static string key = "RGAPI-21351547-c118-4909-a94e-e054c5200235";
         private readonly FieldBiz _FieldBiz = new FieldBiz();
         // GET: Main
         public ActionResult Index()
