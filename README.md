@@ -10,5 +10,5 @@ lol-riot-api is installable via:
 
 
 
-##Main
-![image]https://user-images.githubusercontent.com/55127127/112599983-f348db00-8e53-11eb-8839-396ac861be11.png
+## Main
+![image](https://user-images.githubusercontent.com/55127127/112599983-f348db00-8e53-11eb-8839-396ac861be11.png)
